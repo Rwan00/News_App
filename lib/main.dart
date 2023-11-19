@@ -25,7 +25,15 @@ class MyApp extends StatelessWidget {
             color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.bold
+          ),
+          iconTheme: IconThemeData(
+            color: Colors.black
           )
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.orangeAccent,
+          elevation: 20
         ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
