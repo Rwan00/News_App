@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubits/state.dart';
+import 'package:news_app/network/dio_helper.dart';
 import 'package:news_app/screens/business_screen.dart';
 import 'package:news_app/screens/science_screen.dart';
 import 'package:news_app/screens/settings_screen.dart';
@@ -22,7 +23,6 @@ class NewsCubit extends Cubit<NewsStates> {
         icon: Icon(Icons.sports_outlined), label: "Sports"),
     const BottomNavigationBarItem(
         icon: Icon(Icons.settings), label: "Settings"),
-
   ];
 
   List<Widget> screens = [
@@ -35,5 +35,26 @@ class NewsCubit extends Cubit<NewsStates> {
   void changeBottomNavBar(int index) {
     currentIndex = index;
     emit(NewsBottomNavState());
+  }
+
+  List<dynamic> business = [];
+  void getBusiness() {
+    emit(NewsGetBusinessLoadingState());
+
+    DioHelper.getData(
+      url: "v2/top-headlines",
+      query: {
+        "country": "eg",
+        "category": "business",
+        "apikey": "65f7f556ec76449fa7dc7c0069f040ca"
+      },
+    ).then((value) {
+      business = value!.data["articles"];
+      print(business[0]["title"]);
+      emit(NewsGetBusinessSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(NewsGetBusinessErrorState(error.toString()));
+    });
   }
 }
