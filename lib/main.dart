@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             type: BottomNavigationBarType.fixed,
             selectedItemColor: Colors.orangeAccent,
             elevation: 20),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,primary: Colors.deepOrangeAccent),
         //useMaterial3: true,
       ),
       themeMode: ThemeMode.light,
