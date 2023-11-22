@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ArticleItem extends StatelessWidget {
-  const ArticleItem({super.key});
-
+  final dynamic article;
+  const ArticleItem(this.article,{super.key});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,9 +14,9 @@ class ArticleItem extends StatelessWidget {
             height: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              image: const DecorationImage(
+              image:  DecorationImage(
                 image: NetworkImage(
-                  "https://avatars.githubusercontent.com/u/93911923?v=4",
+                  "${article["urlToImage"]}",
                 ),
                 fit: BoxFit.cover,
               ),
@@ -25,7 +25,7 @@ class ArticleItem extends StatelessWidget {
           const SizedBox(
             width: 20,
           ),
-          const Expanded(
+           Expanded(
             child: SizedBox(
               height: 120,
               child: Column(
@@ -34,15 +34,16 @@ class ArticleItem extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      "Title",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                      "${article["title"]}",
+                      style:
+                          const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                       maxLines: 4,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Text(
-                    "2021-04-02T11:43:002",
-                    style: TextStyle(color: Colors.grey),
+                    "${article["publeshedAt"]}",
+                    style: const TextStyle(color: Colors.grey),
                   )
                 ],
               ),

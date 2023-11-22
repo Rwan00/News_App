@@ -11,21 +11,25 @@ class BusinessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NewsCubit,NewsStates>(
-      listener: (context,state) {},
-      builder: (context,state){
+    return BlocConsumer<NewsCubit, NewsStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var list = NewsCubit.get(context).business;
+
         return ConditionalBuilder(
-        condition: state is! NewsGetBusinessLoadingState,
-        builder: (context) {
-          return ListView.separated(
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (context,index) => const ArticleItem(),
-             separatorBuilder: (context,index) => separator(context), 
-             itemCount: 10,
-             );
-        },
-        fallback: (context) => const Center(child: CircularProgressIndicator(),),
-      );
+          condition: state is! NewsGetBusinessLoadingState,
+          builder: (context) {
+            return ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) =>  ArticleItem(list[index]),
+              separatorBuilder: (context, index) => separator(context),
+              itemCount: 10,
+            );
+          },
+          fallback: (context) => const Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
       },
     );
   }
