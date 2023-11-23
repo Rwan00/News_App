@@ -42,7 +42,7 @@ class ArticleItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${article["publeshedAt"]}",
+                    "${article["publishedAt"]}",
                     style: const TextStyle(color: Colors.grey),
                   )
                 ],
