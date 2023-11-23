@@ -14,7 +14,14 @@ class ArticleItem extends StatelessWidget {
             height: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              image:  DecorationImage(
+              image:  article["urlToImage"] == null ?
+              const DecorationImage(
+                image: AssetImage(
+                  "assets/images/no_img.jpeg",
+                ),
+                fit: BoxFit.cover,
+              ):
+              DecorationImage(
                 image: NetworkImage(
                   "${article["urlToImage"]}",
                 ),

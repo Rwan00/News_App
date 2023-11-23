@@ -34,6 +34,12 @@ class NewsCubit extends Cubit<NewsStates> {
 
   void changeBottomNavBar(int index) {
     currentIndex = index;
+    if (index == 1) {
+      getScience();
+    }
+    if (index == 2) {
+      getSports();
+    }
     emit(NewsBottomNavState());
   }
 
@@ -41,7 +47,8 @@ class NewsCubit extends Cubit<NewsStates> {
   void getBusiness() {
     emit(NewsGetBusinessLoadingState());
 
-    DioHelper.getData(
+    if (business.isEmpty) {
+      DioHelper.getData(
       url: "v2/top-headlines",
       query: {
         "country": "us",
@@ -55,6 +62,56 @@ class NewsCubit extends Cubit<NewsStates> {
     }).catchError((error) {
       print(error.toString());
       emit(NewsGetBusinessErrorState(error.toString()));
+    });
+    } else {
+      emit(NewsGetBusinessSuccessState());
+    }
+  }
+
+  List<dynamic> science = [];
+  void getScience() {
+    emit(NewsGetScienceLoadingState());
+
+    if (science.isEmpty) {
+      DioHelper.getData(
+        url: "v2/top-headlines",
+        query: {
+          "country": "us",
+          "category": "science",
+          "apikey": "56906d2f18e54b34a25a29a9dd93f8a6"
+        },
+      ).then((value) {
+        science = value!.data["articles"];
+        print(science[0]["publishedAt"]);
+        emit(NewsGetScienceSuccessState());
+      }).catchError((error) {
+        print(error.toString());
+        emit(NewsGetScienceErrorState(error.toString()));
+      });
+    }
+    else{
+      emit(NewsGetScienceSuccessState());
+    }
+  }
+
+  List<dynamic> sports = [];
+  void getSports() {
+    emit(NewsGetSportsLoadingState());
+
+    DioHelper.getData(
+      url: "v2/top-headlines",
+      query: {
+        "country": "us",
+        "category": "sport",
+        "apikey": "56906d2f18e54b34a25a29a9dd93f8a6"
+      },
+    ).then((value) {
+      sports = value!.data["articles"];
+      print(sports[0]["publishedAt"]);
+      emit(NewsGetSportsSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(NewsGetSportsErrorState(error.toString()));
     });
   }
 }
