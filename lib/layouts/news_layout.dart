@@ -26,6 +26,13 @@ class NewsLayout extends StatelessWidget {
                       Icons.search,
                     ),
                   ),
+                  IconButton(
+                    onPressed: () {
+                    },
+                    icon: const Icon(
+                      Icons.brightness_6_rounded,
+                    ),
+                  ),
                 ],
               ),
               body: cubit.screens[cubit.currentIndex],
