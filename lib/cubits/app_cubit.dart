@@ -12,12 +12,13 @@ class AppCubit extends Cubit<AppState> {
   void changeAppMode({bool? fromShared}) {
     if (fromShared != null) {
       isDark = fromShared;
+      emit(AppChangeModeState());
+    } else {
+      isDark = !isDark;
+      CacheHelper.putData(key: "isDark", value: isDark)
+          .then((value) => emit(AppChangeModeState()));
     }
-else{
-isDark = !isDark;
-}
+
     
-    CacheHelper.putData(key: "isDark", value: isDark)
-        .then((value) => emit(AppChangeModeState()));
   }
 }
