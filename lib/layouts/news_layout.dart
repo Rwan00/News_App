@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubits/app_cubit.dart';
 import 'package:news_app/cubits/cubit.dart';
 import 'package:news_app/cubits/state.dart';
+import 'package:news_app/modules/search_screen.dart';
 
 
 class NewsLayout extends StatelessWidget {
@@ -10,43 +11,44 @@ class NewsLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (BuildContext context) => NewsCubit()..getBusiness()..getScience()..getSports(),
-        child: BlocConsumer<NewsCubit, NewsStates>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            var cubit = NewsCubit.get(context);
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text("News App"),
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                    },
-                    icon: const Icon(
-                      Icons.search,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      AppCubit.get(context).changeAppMode();
-                    },
-                    icon: const Icon(
-                      Icons.brightness_6_rounded,
-                    ),
-                  ),
-                ],
-              ),
-              body: cubit.screens[cubit.currentIndex],
-              bottomNavigationBar: BottomNavigationBar(
-                items: cubit.bottomItems,
-                currentIndex: cubit.currentIndex,
-                onTap: (index) {
-                  cubit.changeBottomNavBar(index);
+    return BlocConsumer<NewsCubit, NewsStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = NewsCubit.get(context);
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text("News App"),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  navigateTo(context,const SearchScreen());
                 },
+                icon: const Icon(
+                  Icons.search,
+                ),
               ),
-            );
-          },
-        ));
+              IconButton(
+                onPressed: () {
+                  AppCubit.get(context).changeAppMode();
+                },
+                icon: const Icon(
+                  Icons.brightness_6_rounded,
+                ),
+              ),
+            ],
+          ),
+          body: cubit.screens[cubit.currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            items: cubit.bottomItems,
+            currentIndex: cubit.currentIndex,
+            onTap: (index) {
+              cubit.changeBottomNavBar(index);
+            },
+          ),
+        );
+      },
+    );
   }
+
+  void navigateTo(context,widget) => Navigator.push(context,  MaterialPageRoute(builder: (context)=>widget));
 }

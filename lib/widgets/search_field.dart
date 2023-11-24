@@ -6,6 +6,8 @@ class InputField extends StatelessWidget {
   final Function(String)? onChanged;
   final TextInputType? inputType;
   final TextEditingController? controller;
+  final String? Function(String?) validator;
+  final Widget? widget;
 
   const InputField(
       {required this.title,
@@ -13,6 +15,8 @@ class InputField extends StatelessWidget {
       this.onChanged,
       this.inputType,
       this.controller,
+        required this.validator,
+        this.widget,
       super.key}); 
 
   @override
@@ -45,7 +49,8 @@ class InputField extends StatelessWidget {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0),
-                      child: TextField(
+                      child: TextFormField(
+                        validator: validator,
                         controller: controller,
                         keyboardType: inputType,
                         onChanged: onChanged,
@@ -54,6 +59,7 @@ class InputField extends StatelessWidget {
                             const TextStyle(fontSize: 20, color: Colors.black),
                         cursorColor: Colors.blueGrey,
                         decoration: InputDecoration(
+                          suffixIcon: widget,
                             hintText: hint,
                             hintStyle: const TextStyle(
                                 fontSize: 20, color: Colors.grey),

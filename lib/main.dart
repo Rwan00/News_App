@@ -8,6 +8,7 @@ import 'package:news_app/helpers/dio_helper.dart';
 import 'package:news_app/layouts/news_layout.dart';
 
 import 'cubits/app_cubit_state.dart';
+import 'cubits/cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,8 +27,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => AppCubit()..changeAppMode(fromShared: isDark),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => NewsCubit()..getBusiness()..getScience()..getSports()),
+        BlocProvider(create:  (BuildContext context) => AppCubit()..changeAppMode(fromShared: isDark),),
+      ],
       child: BlocConsumer<AppCubit, AppState>(
         listener: (context, state) {},
         builder: (context, state) {

@@ -5,6 +5,7 @@ class ArticleItem extends StatelessWidget {
   const ArticleItem(this.article,{super.key});
   @override
   Widget build(BuildContext context) {
+    String? img = article["urlToImage"];
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Row(
@@ -14,7 +15,7 @@ class ArticleItem extends StatelessWidget {
             height: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              image:  article["urlToImage"] == null ?
+              image:  img == null ?
               const DecorationImage(
                 image: AssetImage(
                   "assets/images/no_img.jpeg",
@@ -23,7 +24,7 @@ class ArticleItem extends StatelessWidget {
               ):
               DecorationImage(
                 image: NetworkImage(
-                  "${article["urlToImage"]}",
+                  img,
                 ),
                 fit: BoxFit.cover,
               ),
