@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubits/app_cubit.dart';
 import 'package:news_app/cubits/cubit.dart';
 import 'package:news_app/cubits/state.dart';
-import 'package:news_app/modules/search_screen.dart';
+import 'package:news_app/screens/search_screen.dart';
+
+import '../methods/nav_method.dart';
 
 
 class NewsLayout extends StatelessWidget {
@@ -50,5 +52,5 @@ class NewsLayout extends StatelessWidget {
     );
   }
 
-  void navigateTo(context,widget) => Navigator.push(context,  MaterialPageRoute(builder: (context)=>widget));
+
 }
