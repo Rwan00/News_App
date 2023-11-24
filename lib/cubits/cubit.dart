@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubits/state.dart';
-import 'package:news_app/network/dio_helper.dart';
+import 'package:news_app/helpers/dio_helper.dart';
 import 'package:news_app/screens/business_screen.dart';
 import 'package:news_app/screens/science_screen.dart';
 import 'package:news_app/screens/sports_screen.dart';
