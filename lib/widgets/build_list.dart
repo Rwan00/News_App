@@ -1,7 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/widgets/article_item.dart';
-import 'package:news_app/widgets/dividor.dart';
+import 'package:news_app/widgets/divider.dart';
 
 class BuildList extends StatelessWidget {
   const BuildList({
