@@ -4,12 +4,14 @@ import 'package:news_app/widgets/article_item.dart';
 import 'package:news_app/widgets/divider.dart';
 
 class BuildList extends StatelessWidget {
-  const BuildList({
+   const BuildList({
     super.key,
     required this.itemsList,
+    required this.isSearch,
   });
 
   final List itemsList;
+   final bool isSearch;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class BuildList extends StatelessWidget {
           itemCount: itemsList.length,
         );
       },
-      fallback: (context) => const Center(
+      fallback: (context) => isSearch? Container() :const Center(
         child: CircularProgressIndicator(),
       ),
     );
