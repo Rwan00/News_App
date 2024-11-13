@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,31 +8,42 @@ import 'package:news_app/cubits/app_cubit.dart';
 import 'package:news_app/helpers/cache_helper.dart';
 import 'package:news_app/helpers/dio_helper.dart';
 import 'package:news_app/layouts/news_layout.dart';
+import 'package:window_size/window_size.dart';
 
 import 'cubits/app_cubit_state.dart';
 import 'cubits/cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  if (Platform.isWindows) {
+    setWindowMinSize(const Size(500, 500));
+  }
   Bloc.observer = SimpleBlocObserver();
   DioHelper.init();
   await CacheHelper.init();
 
   bool? isDark = CacheHelper.getData(key: "isDark");
-  runApp( MyApp(isDark: isDark));
+  runApp(MyApp(isDark: isDark));
 }
 
 class MyApp extends StatelessWidget {
   final bool? isDark;
-   const MyApp( {this.isDark,super.key, });
+  const MyApp({
+    this.isDark,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => NewsCubit()..getBusiness()/*..getScience()..getSports()*/),
-        BlocProvider(create:  (BuildContext context) => AppCubit()..changeAppMode(fromShared: isDark),),
+        BlocProvider(
+            create: (context) =>
+                NewsCubit()..getBusiness() /*..getScience()..getSports()*/),
+        BlocProvider(
+          create: (BuildContext context) =>
+              AppCubit()..changeAppMode(fromShared: isDark),
+        ),
       ],
       child: BlocConsumer<AppCubit, AppState>(
         listener: (context, state) {},

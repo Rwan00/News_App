@@ -42,6 +42,13 @@ dependencies:
   webview_flutter: ^4.4.2
   win32: ^5.8.0
   async: ^2.11.0
+  desktop_window: ^0.4.2
+  responsive_builder: ^0.7.1
+
+  window_size:
+    git:
+      url: https://github.com/google/flutter-desktop-embedding
+      path: plugins/window_size
 
 dev_dependencies:
   flutter_test:

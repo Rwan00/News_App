@@ -20,7 +20,7 @@ class BuildList extends StatelessWidget {
       builder: (context) {
         return ListView.separated(
           physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) => ArticleItem(itemsList[index]),
+          itemBuilder: (context, index) => ArticleItem(itemsList[index],index: index,),
           separatorBuilder: (context, index) => const MySeparetor(),
           itemCount: itemsList.length,
         );

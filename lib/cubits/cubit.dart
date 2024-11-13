@@ -40,6 +40,13 @@ class NewsCubit extends Cubit<NewsStates> {
   }
 
   List<dynamic> business = [];
+  int selectedIndex = 0;
+
+  void selectBusinessItem(index) {
+    selectedIndex = index;
+    emit(SelectBusinessItemState());
+  }
+
   void getBusiness() {
     emit(NewsGetBusinessLoadingState());
 
@@ -53,6 +60,7 @@ class NewsCubit extends Cubit<NewsStates> {
         },
       ).then((value) {
         business = value!.data["articles"];
+       
         print(business[0]["publishedAt"]);
 
         emit(NewsGetBusinessSuccessState());

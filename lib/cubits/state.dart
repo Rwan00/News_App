@@ -3,6 +3,7 @@ abstract class NewsStates {}
 class NewsInitialState extends NewsStates {}
 
 class NewsBottomNavState extends NewsStates {}
+class SelectBusinessItemState extends NewsStates {}
 
 class NewsGetBusinessLoadingState extends NewsStates {}
 
