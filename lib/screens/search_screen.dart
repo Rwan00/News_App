@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubits/cubit.dart';
 import 'package:news_app/cubits/state.dart';
 
-import '../widgets/article_item.dart';
+
 import '../widgets/build_list.dart';
 import '../widgets/search_field.dart';
 

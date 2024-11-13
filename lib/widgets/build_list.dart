@@ -4,14 +4,14 @@ import 'package:news_app/widgets/article_item.dart';
 import 'package:news_app/widgets/divider.dart';
 
 class BuildList extends StatelessWidget {
-   const BuildList({
+  const BuildList({
     super.key,
     required this.itemsList,
     required this.isSearch,
   });
 
   final List itemsList;
-   final bool isSearch;
+  final bool isSearch;
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +20,16 @@ class BuildList extends StatelessWidget {
       builder: (context) {
         return ListView.separated(
           physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) =>  ArticleItem(itemsList[index]),
-          separatorBuilder: (context, index) => separator(context),
+          itemBuilder: (context, index) => ArticleItem(itemsList[index]),
+          separatorBuilder: (context, index) => const MySeparetor(),
           itemCount: itemsList.length,
         );
       },
-      fallback: (context) => isSearch? Container() :const Center(
-        child: CircularProgressIndicator(),
-      ),
+      fallback: (context) => isSearch
+          ? Container()
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
     );
   }
 }

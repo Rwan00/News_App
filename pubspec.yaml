@@ -40,6 +40,8 @@ dependencies:
   conditional_builder_null_safety: ^0.0.6
   shared_preferences: ^2.2.2
   webview_flutter: ^4.4.2
+  win32: ^5.8.0
+  async: ^2.11.0
 
 dev_dependencies:
   flutter_test:
