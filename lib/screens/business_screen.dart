@@ -30,6 +30,7 @@ class BusinessScreen extends StatelessWidget {
                   child: BuildList(
                     itemsList: businessList,
                     isSearch: false,
+                    isMobile: false,
                   ),
                 ),
                 const SizedBox(
@@ -53,7 +54,6 @@ class BusinessScreen extends StatelessWidget {
                             "${businessList[cubit.selectedIndex]["description"]}",
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
-                          
                         ),
                       ],
                     ),

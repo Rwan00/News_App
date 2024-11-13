@@ -11,7 +11,8 @@ import '../screens/web_view_screen.dart';
 class ArticleItem extends StatelessWidget {
   final dynamic article;
   final int index;
-  const ArticleItem(this.article, {super.key, required this.index});
+  final bool isMobile;
+  const ArticleItem(this.article, {super.key, required this.index, required this.isMobile});
   @override
   Widget build(BuildContext context) {
     String? img = article["urlToImage"];
@@ -24,9 +25,11 @@ class ArticleItem extends StatelessWidget {
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            border: cubit.selectedIndex == index
-                ? Border.all(color: Colors.orangeAccent)
-                : null,
+            border: isMobile
+                ? null
+                : cubit.selectedIndex == index
+                    ? Border.all(color: Colors.orangeAccent)
+                    : null,
           ),
           child: InkWell(
             onTap: () {

@@ -7,11 +7,12 @@ class BuildList extends StatelessWidget {
   const BuildList({
     super.key,
     required this.itemsList,
-    required this.isSearch,
+    required this.isSearch,  this.isMobile = true,
   });
 
   final List itemsList;
   final bool isSearch;
+   final bool? isMobile ;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class BuildList extends StatelessWidget {
       builder: (context) {
         return ListView.separated(
           physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) => ArticleItem(itemsList[index],index: index,),
+          itemBuilder: (context, index) => ArticleItem(itemsList[index],index: index, isMobile: isMobile!,),
           separatorBuilder: (context, index) => const MySeparetor(),
           itemCount: itemsList.length,
         );
